@@ -1,8 +1,11 @@
+import { AddTaskForm } from "./components/AddTaskForm"
+import { CheckBox } from "./components/CheckBox"
+
 function App() {
   return (
     <div className="flex items-center flex-col">
-      <h1 className="text-3xl font-bold text-blue-500">PM — Project Management App</h1>
-      <p>Initial setup</p>
+      <AddTaskForm />
+      <CheckBox checked={false} onChange={(checked) => console.log("Checked:", checked)} />
     </div>
   )
 }
