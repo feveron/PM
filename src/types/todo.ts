@@ -3,7 +3,8 @@ export type TodoItem = {
   done: boolean
   title: string
   description: string
-  thumbnail: string
 }
 
-export type TodoList = TodoItem[]
+export type TodoList = {
+  todos: TodoItem[]
+}
