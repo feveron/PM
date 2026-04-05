@@ -1,8 +1,9 @@
+import { TasksPage } from "./pages/TasksPage"
+
 function App() {
   return (
-    <div className="flex items-center flex-col">
-      <h1 className="text-3xl font-bold text-blue-500">PM — Project Management App</h1>
-      <p>Initial setup</p>
+    <div className="flex min-h-screen bg-yellow-100 items-center flex-col w-full p-4">
+      <TasksPage />
     </div>
   )
 }
