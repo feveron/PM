@@ -29,8 +29,8 @@ export function AddTaskForm() {
             />
             <button
                 onClick={handleAdd}
-                className="py-1 px-2 bg-white text-blue-900 border-2 border-blue-900 rounded-md hover:bg-blue-100"
-            >
+                className="py-1 px-6 bg-white text-orange-900 border-2 border-orange-900 rounded-md hover:bg-orange-100"
+            >   
                 Add
             </button>
         </div>
