@@ -8,7 +8,7 @@ type Props = {
 export default function TodoInput({ placeholder, setValue, value, label }: Props) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="underline">{label}:</div>
+      <h2 className="text-2xl font-bold text-transparent [-webkit-text-stroke:1px_black]">{label}:</h2>
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
