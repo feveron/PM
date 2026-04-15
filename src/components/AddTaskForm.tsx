@@ -14,7 +14,7 @@ export function AddTaskForm() {
     }
 
     return (
-        <div className="p-5 w-full flex items-end justify-start gap-4">
+        <div className="p-5 w-full flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4">
             <TodoInput
                 placeholder="Enter task title"
                 setValue={setTitle}
