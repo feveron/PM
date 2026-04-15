@@ -10,7 +10,7 @@ export function AddTaskForm({ onAdd }: Props) {
     const [description, setDescription] = useState("")
 
     return (
-        <div className="p-5 w-full flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4">
+        <div className="p-5 w-full flex flex-col sm:flex-row items-center sm:items-end justify-start gap-4">
             <TodoInput
                 placeholder="Enter task title"
                 setValue={setTitle}

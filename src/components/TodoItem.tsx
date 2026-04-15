@@ -3,10 +3,10 @@ import type { TodoItemProps } from "../types/todo";
 import { CheckBox } from "./CheckBox";
 import Delete from '../assets/icons/delete-svgrepo-com.svg';
 import Edit from '../assets/icons/edit-svgrepo-com.svg';
+import { twMerge } from "tailwind-merge";
 
 export function TodoItem({ id, title, description, done, onToggle, onDelete, onUpdate }: TodoItemProps) {
   const [expanded, setExpanded] = React.useState(false);
-
   const [isEditing, setIsEditing] = React.useState(false);
   const [editTitle, setEditTitle] = React.useState(title);
   const [editDescription, setEditDescription] = React.useState(description);
@@ -18,7 +18,7 @@ export function TodoItem({ id, title, description, done, onToggle, onDelete, onU
            <div onClick={(e) => e.stopPropagation()}>
               <CheckBox onChange={()=> onToggle(id)} checked={done} />
           </div>
-          <h2 title={title} className="text-2xl line-clamp-1 font-bold text-black">{title}</h2>
+          <h2 title={title} className={twMerge("text-2xl line-clamp-1 font-bold text-black", done ? 'line-through text-gray-500' : '')}>{title}</h2>
         </div>
         <div className="flex flex-row gap-1 items-center justify-center">
           <img onClick={(e) => {
@@ -31,7 +31,7 @@ export function TodoItem({ id, title, description, done, onToggle, onDelete, onU
             }} className="w-6 h-6 cursor-pointer" src={Delete} alt="delete"/>
         </div>
       </div>
-      <p className={`px-3 text-gray-800 text-justify mt-2 ${
+      <p className={`px-3 text-gray-800 text-justify mt-2 ${done ? 'line-through text-gray-500' : ''}  ${
           expanded ? "" : "line-clamp-2"
         }`}>{description}</p>
         {isEditing && (
