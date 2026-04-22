@@ -4,39 +4,36 @@ import { AddTaskForm } from "../components/AddTaskForm";
 import { ToDoList } from "../components/TodoList";
 import { FilterBar } from "../components/FilterBar";
 
+import {
+  addTodo as addTodoUtil,
+  deleteTodo as deleteTodoUtil,
+  updateTodo as updateTodoUtil,
+  toggleTodo as toggleTodoUtil,
+  filterTodos,
+} from "../utils/todoUtils";
+
 export function TasksPage() {
   const [todos, setTodos] = useState<TodoItem[]>(() => {
     const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
   });
+
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === "active") return !todo.done;
-    if (filter === "completed") return todo.done;
-    return true;
-  });
-  // save
+
+  const filteredTodos = filterTodos(todos, filter);
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   // ADD
   const addTodo = (title: string, description: string) => {
-    if (!title.trim()) return;
-
-    const newTodo: TodoItem = {
-      id: Date.now(),
-      title,
-      description,
-      done: false,
-    };
-
-    setTodos((prev) => [...prev, newTodo]);
+    setTodos((prev) => addTodoUtil(prev, title, description));
   };
 
   // DELETE
   const deleteTodo = (id: number) => {
-    setTodos((prev) => prev.filter((t) => t.id !== id));
+    setTodos((prev) => deleteTodoUtil(prev, id));
   };
 
   // UPDATE
@@ -44,20 +41,17 @@ export function TasksPage() {
     id: number,
     data: { title: string; description: string }
   ) => {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, ...data } : t))
-    );
+    setTodos((prev) => updateTodoUtil(prev, id, data));
   };
 
   // TOGGLE
   const toggleTodo = (id: number) => {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
-    );
+    setTodos((prev) => toggleTodoUtil(prev, id));
   };
 
   return (
     <div className="flex items-center flex-col max-w-[1000px] p-4 w-full">
+      <p>{import.meta.env.VITE_APP_STATUS}</p>
       <AddTaskForm onAdd={addTodo} />
       <FilterBar filter={filter} setFilter={setFilter} />
       <ToDoList
