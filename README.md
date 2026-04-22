@@ -1,3 +1,7 @@
+[![CI/CD Pipeline](https://github.com/feveron/PM/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/feveron/PM/actions/workflows/ci-cd.yml)
+
+Live demo: https://pm-bay.vercel.app/
+
 # PM — Project Management App
 
 A simple React application created as part of a laboratory work to practice Git workflows, including version control, branching strategies, pull requests, and merge conflict resolution.
