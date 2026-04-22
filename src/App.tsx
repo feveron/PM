@@ -1,11 +1,9 @@
-import { AddTaskForm } from "./components/AddTaskForm"
-import { CheckBox } from "./components/CheckBox"
+import { TasksPage } from "./pages/TasksPage"
 
 function App() {
   return (
-    <div className="flex items-center flex-col">
-      <AddTaskForm />
-      <CheckBox checked={false} onChange={(checked) => console.log("Checked:", checked)} />
+    <div className="flex min-h-screen bg-yellow-100 items-center flex-col w-full py-4 px-6">
+      <TasksPage />
     </div>
   )
 }

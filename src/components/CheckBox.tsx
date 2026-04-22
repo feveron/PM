@@ -16,8 +16,9 @@ export function CheckBox({ checked, onChange }: CheckBoxProps) {
 
     return (
         <div
+            data-testid="todo-checkbox"
             onClick={handleToggle}
-            className="border-2 bg-white border-black w-6 h-6 flex items-center justify-center cursor-pointer rounded "
+            className="border-2 bg-white border-black w-6 h-6 flex items-center justify-center cursor-pointer rounded"
         >
            {done && (
                 <img
