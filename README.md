@@ -1,3 +1,5 @@
+[![CI/CD Pipeline](https://github.com/feveron/PM/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/feveron/PM/actions/workflows/ci-cd.yml)
+
 Live demo: https://pm-bay.vercel.app/
 
 # PM — Project Management App
