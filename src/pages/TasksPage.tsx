@@ -3,7 +3,7 @@ import type { TodoItem } from "../types/todo";
 import { AddTaskForm } from "../components/AddTaskForm";
 import { ToDoList } from "../components/TodoList";
 import { FilterBar } from "../components/FilterBar";
-
+import posthog from "posthog-js"
 import {
   addTodo as addTodoUtil,
   deleteTodo as deleteTodoUtil,
@@ -29,11 +29,18 @@ export function TasksPage() {
   // ADD
   const addTodo = (title: string, description: string) => {
     setTodos((prev) => addTodoUtil(prev, title, description));
+
+    posthog.capture("task_created", {
+      has_description: !!description,
+      title_length: title.length,
+    });
   };
 
   // DELETE
   const deleteTodo = (id: number) => {
     setTodos((prev) => deleteTodoUtil(prev, id));
+
+    posthog.capture("task_deleted");
   };
 
   // UPDATE
@@ -42,11 +49,15 @@ export function TasksPage() {
     data: { title: string; description: string }
   ) => {
     setTodos((prev) => updateTodoUtil(prev, id, data));
+
+    posthog.capture("task_updated");
   };
 
   // TOGGLE
   const toggleTodo = (id: number) => {
     setTodos((prev) => toggleTodoUtil(prev, id));
+
+    posthog.capture("task_completed");
   };
 
   return (
