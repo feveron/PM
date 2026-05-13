@@ -14,13 +14,19 @@ export function TodoItem({ id, title, description, done, onToggle, onDelete, onU
   return (
     <div onClick={() => setExpanded(prev => !prev)} className="flex justify-center bg-white flex-col p-4 border rounded-lg shadow-md w-full cursor-pointer transition">
       <div className="px-4 items-center flex w-full justify-between flex-row">
-        <div className="flex-row items-center justify-start max-w-[80%] gap-4 flex">
-           <div onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center gap-4 basis-[80%] min-w-0">
+             <div onClick={(e) => e.stopPropagation()}>
               <CheckBox onChange={()=> onToggle(id)} checked={done} />
           </div>
-          <h2 title={title} className={twMerge("text-2xl line-clamp-1 font-bold text-black", done ? 'line-through text-gray-500' : '')}>{title}</h2>
+          <h2
+            title={title}
+            className={twMerge(
+              "text-lg sm:text-2xl font-bold text-black truncate",
+              done ? "line-through text-gray-500" : ""
+            )}
+          >{title}</h2>
         </div>
-        <div className="flex flex-row gap-1 items-center justify-center">
+        <div className="flex flex-row gap-1 items-center shrink-0 justify-center">
           <img onClick={(e) => {
             e.stopPropagation()
             setIsEditing(true)
@@ -31,7 +37,7 @@ export function TodoItem({ id, title, description, done, onToggle, onDelete, onU
             }} className="w-6 h-6 cursor-pointer" src={Delete} alt="delete"/>
         </div>
       </div>
-      <p className={`px-3 text-gray-800 text-justify mt-2 ${done ? 'line-through text-gray-500' : ''}  ${
+      <p className={`px-3 text-gray-800 break-words text-justify mt-2 ${done ? 'line-through text-gray-500' : ''}  ${
           expanded ? "" : "line-clamp-2"
         }`}>{description}</p>
         {isEditing && (
