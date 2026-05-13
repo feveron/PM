@@ -1,9 +1,9 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import posthog from 'posthog-js'
-import * as Sentry from "@sentry/react";
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import "./index.css"
+import App from "./App.tsx"
+import posthog from "posthog-js"
+import * as Sentry from "@sentry/react"
 
 Sentry.init({
   dsn: "https://da779397b72c1a6403d2d365be27ebbb@o4511345402707968.ingest.de.sentry.io/4511345407098961",
@@ -12,9 +12,10 @@ Sentry.init({
     Sentry.replayIntegration(),
   ],
   tracesSampleRate: 1.0,
+  replaysSessionSampleRate: 1.0,
+  replaysOnErrorSampleRate: 1.0,
   environment: "development",
-  sendDefaultPii: true
-
+  sendDefaultPii: true,
 })
 
 posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
@@ -24,8 +25,10 @@ posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
   capture_pageview: true,
 })
 
-createRoot(document.getElementById('root')!).render(
+const SentryApp = Sentry.withProfiler(App)
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <SentryApp />
   </StrictMode>,
 )

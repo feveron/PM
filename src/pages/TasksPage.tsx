@@ -11,6 +11,7 @@ import {
   toggleTodo as toggleTodoUtil,
   filterTodos,
 } from "../utils/todoUtils";
+import * as Sentry from "@sentry/react"
 
 export function TasksPage() {
   const [todos, setTodos] = useState<TodoItem[]>(() => {
@@ -25,6 +26,17 @@ export function TasksPage() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    Sentry.setUser({
+      id: "todo-user-1",
+      email: "student@test.com",
+      username: "Todo App User",
+    })
+
+    Sentry.setTag("page", "tasks")
+    Sentry.setTag("project", "PM Todo App")
+  }, [])
 
   // ADD
   const addTodo = (title: string, description: string) => {
@@ -65,6 +77,14 @@ export function TasksPage() {
       <p>{import.meta.env.VITE_APP_STATUS}</p>
       <AddTaskForm onAdd={addTodo} />
       <FilterBar filter={filter} setFilter={setFilter} />
+      <button
+        onClick={() => {
+          throw new Error("Sentry Test Error: Todo app failed")
+        }}
+        className="px-4 mt-4 py-2 bg-red-500 text-white rounded"
+      >
+        Викликати помилку
+      </button>
       <ToDoList
         todos={filteredTodos}
         onDelete={deleteTodo}
