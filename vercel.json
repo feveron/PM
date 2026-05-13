@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        },
+        {
             "source": "/ingest/static/:path*",
             "destination": "https://eu-assets.i.posthog.com/static/:path*"
         },
