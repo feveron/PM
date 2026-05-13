@@ -1,36 +1,16 @@
 {
     "rewrites": [
         {
-            "source": "/ingest/e/",
-            "destination": "https://eu.i.posthog.com/e/"
-        },
-        {
-            "source": "/ingest/e/:path*",
-            "destination": "https://eu.i.posthog.com/e/:path*"
-        },
-        {
-            "source": "/ingest/s/",
-            "destination": "https://eu.i.posthog.com/s/"
-        },
-        {
-            "source": "/ingest/s/:path*",
-            "destination": "https://eu.i.posthog.com/s/:path*"
-        },
-        {
-            "source": "/ingest/flags/",
-            "destination": "https://eu.i.posthog.com/flags/"
-        },
-        {
-            "source": "/ingest/flags/:path*",
-            "destination": "https://eu.i.posthog.com/flags/:path*"
+            "source": "/ingest/static/:path*",
+            "destination": "https://eu-assets.i.posthog.com/static/:path*"
         },
         {
             "source": "/ingest/array/:path*",
             "destination": "https://eu-assets.i.posthog.com/array/:path*"
         },
         {
-            "source": "/ingest/static/:path*",
-            "destination": "https://eu-assets.i.posthog.com/static/:path*"
+            "source": "/ingest/:path*",
+            "destination": "https://eu.i.posthog.com/:path*"
         }
     ]
 }
