@@ -18,9 +18,9 @@ Sentry.init({
   sendDefaultPii: true,
 })
 
-posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+posthog.init('phc_vBCAWk2bBDKVM9Wq4CHsdrFceabiTFUCTndMpxga9GNj', {
   api_host: window.location.origin + "/ingest",
-  ui_host: import.meta.env.VITE_POSTHOG_HOST,
+  ui_host: "https://eu.posthog.com",
   person_profiles: "always",
   capture_pageview: true,
 })

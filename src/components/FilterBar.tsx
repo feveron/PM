@@ -1,4 +1,4 @@
-import { posthog } from "posthog-js";
+import posthog from "posthog-js";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -12,10 +12,21 @@ export function FilterBar({ filter, setFilter }: Props) {
   const [showFlag, setShowFlag] = useState(false);
 
   useEffect(() => {
-    posthog.onFeatureFlags(() => {
-      setShowFlag(!!posthog.isFeatureEnabled("show-urgent-filter"))
-    });
-  }, []);
+    const unsubscribe = posthog.onFeatureFlags((flags) => {
+      console.log("loaded flags:", flags)
+
+      const value = posthog.isFeatureEnabled("show-urgent-filter")
+      console.log("show-urgent-filter:", value)
+
+      setShowFlag(value === true)
+    })
+
+    posthog.reloadFeatureFlags()
+
+    return () => {
+      unsubscribe?.()
+    }
+  }, [])
 
   return (
     <div className="flex px-4 justify-start w-full gap-2">

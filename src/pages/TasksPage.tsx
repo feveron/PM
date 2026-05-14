@@ -76,10 +76,19 @@ export function TasksPage() {
     <div className="flex items-center flex-col max-w-[1000px] p-4 w-full">
       <p>{import.meta.env.VITE_APP_STATUS}</p>
       <AddTaskForm onAdd={addTodo} />
+      <button
+        onClick={() => {
+          const value: any = null
+          value.todoAlertUniqueMethod()
+        }}
+        className="px-4 my-4 py-2 bg-red-500 text-white rounded"
+      >
+        Викликати помилку
+      </button>
       <FilterBar filter={filter} setFilter={setFilter} />
       <button
         onClick={() => {
-          throw new Error("Sentry Test Error: Todo app failed")
+          throw new Error(`Sentry Test Error: Todo app failed ${Date.now()}`)
         }}
         className="px-4 mt-4 py-2 bg-red-500 text-white rounded"
       >
